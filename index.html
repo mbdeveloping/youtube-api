@@ -1,0 +1,96 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            position: relative;
+            width: 50%;
+            height: 315px;
+        }
+
+        button {
+            width: 50px;
+            height: 50px;
+            background: red;
+            border-radius: 50%;
+            border: none;
+            outline: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+
+        .img {
+            width: 100%;
+            height: 100%;
+            background: grey;
+            transition: all 1s;
+        }
+
+        #video {
+            display: none;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .show {
+            display: block !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="img"></div>
+        <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/tcUQG0MC_OQ?enablejsapi=1"
+            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen enablejsapi="1"></iframe>
+        <button>Play</button>
+    </div>
+
+
+    <script>
+        let x = document.getElementById('video');
+
+
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('video', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady() {
+            console.log("hey Im ready");
+            document.querySelector('button').addEventListener('click', () => {
+                let video = document.querySelector('#video');
+                let videoAttr = video.getAttribute('src');
+
+                document.querySelector('.img').className = "hide";
+                document.querySelector('button').className = "hide";
+                document.querySelector('#video').className = "show";
+                player.playVideo();
+
+            });
+
+        }
+    </script>
+</body>
+
+</html>
