@@ -50,7 +50,7 @@
 <body>
     <div class="container">
         <div class="img"></div>
-        <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/tcUQG0MC_OQ?enablejsapi=1"
+        <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/tcUQG0MC_OQ"
             frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen enablejsapi="1"></iframe>
         <button>Play</button>
@@ -58,7 +58,9 @@
 
 
     <script>
-        let x = document.getElementById('video');
+        let video = document.querySelector('#video');
+        let videoAttr = video.getAttribute('src');
+        video.setAttribute('src', videoAttr + "?enablejsapi=1");
 
 
         var tag = document.createElement('script');
@@ -79,8 +81,7 @@
         function onPlayerReady() {
             console.log("hey Im ready");
             document.querySelector('button').addEventListener('click', () => {
-                let video = document.querySelector('#video');
-                let videoAttr = video.getAttribute('src');
+            
 
                 document.querySelector('.img').className = "hide";
                 document.querySelector('button').className = "hide";
